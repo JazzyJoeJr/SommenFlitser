@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
+     
+    
+    <script>
+    
+        var app = angular.module("app",['ngResource']);
+        
+        app.factory("hotelservice",function($resource){
+             return $resource('http://localhost:24842/api/hotel/:hotel',{hotel: "@hotel"}         
+            );
+	
+        });
+        
+        app.controller("HotelController",function($scope,hotelservice){
+            
+            
+           $scope.GetHotels = function(){
+              $scope.data = hotelservice.query();
+           }
+           
+           var hotel  = {
+               "Name":"tom",
+               "Country":"Engeland",
+               "Price":333
+           };
+           $scope.PostHotel = function(){
+                hotelservice.save({Name: 'ppp', Country: 'ttt',Price:333});
+           }
+           
+           $scope.GetHotelById = function(){
+               $scope.data = hotelservice.get({hotel: 3});
+           }
+        });    
+    
+    </script>
+     
+</head>
+<body ng-app="app">
+   <div ng-controller="HotelController">
+       {{data}}
+       <button ng-click="GetHotels()" value="Get Hotels">Get Hotels</button>
+       <br>
+       <button ng-click="PostHotel()" value="Post Hotels">Post Hotels</button>
+       <br>
+       <button ng-click="GetHotelById()" value="Post Hotels">Get hotel by id</button>
+   </div>
+    
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
+     
+    
+    <script>
+    
+        var app = angular.module("app",['ngResource']);
+        
+        app.factory("hotelservice",function($resource){
+             return $resource('http://localhost:24842/api/hotel/:hotel',{hotel: "@hotel"}         
+            );
+	
+        });
+        
+        app.controller("HotelController",function($scope,hotelservice){
+            
+            
+           $scope.GetHotels = function(){
+              $scope.data = hotelservice.query();
+           }
+           
+           var hotel  = {
+               "Name":"tom",
+               "Country":"Engeland",
+               "Price":333
+           };
+           $scope.PostHotel = function(){
+                hotelservice.save({Name: 'ppp', Country: 'ttt',Price:333});
+           }
+           
+           $scope.GetHotelById = function(){
+               $scope.data = hotelservice.get({hotel: 3});
+           }
+        });    
+    
+    </script>
+     
+</head>
+<body ng-app="app">
+   <div ng-controller="HotelController">
+       {{data}}
+       <button ng-click="GetHotels()" value="Get Hotels">Get Hotels</button>
+       <br>
+       <button ng-click="PostHotel()" value="Post Hotels">Post Hotels</button>
+       <br>
+       <button ng-click="GetHotelById()" value="Post Hotels">Get hotel by id</button>
+   </div>
+    
+</body>
+</html>

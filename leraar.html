@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>GETTING STARTED WITH BRACKETS</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
+        <script src="app.js"></script>
+        <script>
+            
+            app.controller("OefeningController",function($scope,GetOefeningByIdService,OefeningService){
+                
+                var init = function(){
+                    $scope.currentId = 1;
+                    var oefeningen = GetOefeningByIdService.query({Id:$scope.currentId});
+                    oefening = oefeningen[0];
+                    $scope.oefening = oefeningen[0];
+                    $scope.data = GetOefeningByIdService.query({Id:$scope.currentId});
+                    console.log(oefeningen)
+                    console.log(oefening);
+                }
+                
+                init();
+                
+                $scope.GetNext = function() {
+                    $scope.currentId++;
+                    $scope.data = GetOefeningByIdService.query({Id:$scope.currentId})
+                }
+                
+                $scope.GetPrevious = function() {
+                    $scope.currentId--;
+                    $scope.data = GetOefeningByIdService.query({Id:$scope.currentId});
+                }
+                
+                $scope.SetOefeningTrue = function() {
+                    $scope.data = OefeningService.query({Id:$scope.currentId});
+                }
+                
+            });
+           
+        </script>
+    </head>
+    <body ng-app="app">
+        <div ng-controller="OefeningController">
+            <button ng-click="GetPrevious()">vorige</button>
+            <blockquote ng-repaet="oefening in data">
+                {{oefening}}
+            </blockquote>
+            {{data}}
+            {{currentId}}
+            {{oefening}}
+            <button ng-click="GetNext()">volgende</button>
+            <button ng-click="SetOefeningTrue()">Toon Oefening</button>
+        </div>
+    </body>
+</html>
