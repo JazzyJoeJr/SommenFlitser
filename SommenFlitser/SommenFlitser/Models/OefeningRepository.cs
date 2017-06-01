@@ -29,6 +29,7 @@ namespace SommenFlitser.Models
 
         private void CreateOefeningen()
         {
+            oefeningen.Add(new Oefening { Id = 0, Vraag = "", Actief = true, Resultaat = 0 });
             oefeningen.Add(new Oefening { Id = 1, Vraag = "7 + 5", Actief = false, Resultaat = 12 });
             oefeningen.Add(new Oefening { Id = 2, Vraag = "2 + 3", Actief = false, Resultaat = 5 });
             oefeningen.Add(new Oefening { Id = 3, Vraag = "8 - 4", Actief = false, Resultaat = 4 });

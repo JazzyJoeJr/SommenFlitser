@@ -186,6 +186,7 @@
     <Compile Include="Controllers\GetOefeningByIdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OefeningController.cs" />
+    <Compile Include="Controllers\OplossingController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">

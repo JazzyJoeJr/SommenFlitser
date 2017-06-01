@@ -16,3 +16,7 @@ app.factory("ActiveOefeningService",function($resource){
 app.factory("GetOefeningByIdService",function($resource){
     return $resource('http://localhost:51794/api/GetOefeningById/:oefening',{oefening: "@oefening"})
 });
+
+app.factory("OplossingService", function($resource){
+    return $resource('http://localhost:51794/api/Oplossing/:oplossing',{oplossing: "@oplossing"})
+})

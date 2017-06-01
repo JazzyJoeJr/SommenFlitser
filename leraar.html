@@ -4,21 +4,35 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>GETTING STARTED WITH BRACKETS</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
         <script src="app.js"></script>
+        <link rel="stylesheet" href="styles.css">
         <script>
+            
+            app.controller("OefeningActiveController",function($scope, ActiveOefeningService,$interval){
+                
+                var init = function(){
+                    
+                     $interval(function () {
+                            $scope.data = ActiveOefeningService.query();
+                        },5000);
+                
+                }
+                    init();
+            });
             
             app.controller("OefeningController",function($scope,GetOefeningByIdService,OefeningService){
                 
                 var init = function(){
                     $scope.currentId = 1;
-                    var oefeningen = GetOefeningByIdService.query({Id:$scope.currentId});
-                    oefening = oefeningen[0];
-                    $scope.oefening = oefeningen[0];
+                    
                     $scope.data = GetOefeningByIdService.query({Id:$scope.currentId});
-                    console.log(oefeningen)
-                    console.log(oefening);
+                    console.log($scope.data);
+                   
+                  
+                    console.log($scope.val);
                 }
                 
                 init();
@@ -37,21 +51,27 @@
                     $scope.data = OefeningService.query({Id:$scope.currentId});
                 }
                 
+                $scope.Reset = function() {
+                    $scope.data = OefeningService.query({Id:0})
+                }
+                
             });
            
         </script>
     </head>
     <body ng-app="app">
         <div ng-controller="OefeningController">
-            <button ng-click="GetPrevious()">vorige</button>
-            <blockquote ng-repaet="oefening in data">
-                {{oefening}}
-            </blockquote>
-            {{data}}
-            {{currentId}}
-            {{oefening}}
-            <button ng-click="GetNext()">volgende</button>
-            <button ng-click="SetOefeningTrue()">Toon Oefening</button>
+            <button type="button" class="btn btn-nav" ng-click="GetPrevious()">vorige</button>
+            {{data[0].Vraag}}
+            <button type="button" class="btn btn-nav" ng-click="GetNext()">volgende</button> Antwoord: {{data[0].Resultaat}}<br/>
+            <button type="button" class="btn btn-nav" ng-click="SetOefeningTrue()">Toon Oefening</button><br/>
+            <button type="button" class="btn btn-nav" ng-click="Reset()">Reset</button><br/>
+            Id = {{currentId}}<br/>
         </div>
+        <div ng-controller="OefeningActiveController">
+            
+            <p>dit ziet de leerling: {{data[0].Vraag}}</p>
+            </div>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

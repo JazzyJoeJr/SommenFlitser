@@ -24,26 +24,14 @@
                 }
                     init();
             });
-            
-            app.controller("OplossingController", function($scope, OplossingService){
-                
-                $scope.SendOplossing = function(Id){
-                    $scope.oplossing = OplossingService.query({Id:Id});
-                }
-                
-            })
            
         </script>
     </head>
     <body ng-app="app">
         <div ng-controller="OefeningActiveController">
             {{data[0].Vraag}}<br/>
-        </div>
-        <div ng-controller="OplossingController">
-            <form ng-submit="SendOplossing(Id)">
-                <input type=text name="Id"/>
-                <input type="submit" id="submit" value="Antwoord"/>
-            </form>
+            <input type=text/>
+            <button type="button" class="btn btn-navbar">Antwoord</button>
         </div>
         <script src="js/bootstrap.min.js"></script>
     </body>
