@@ -28,3 +28,20 @@ button.css3button {
 		0px -1px 0px rgba(000,000,000,0.7),
 		0px 1px 0px rgba(255,255,255,0.3);
 }
+
+body{
+    font-family: 'Maven Pro Black';
+    font-size: 48px;
+    color: indianred;
+    
+    margin: auto;
+    width: 70%;
+    border: 3px solid green;
+    padding: 10px;
+}
+
+button{
+    font-family: 'Maven Pro Black';
+    font-size: 24px;
+    color:cornflowerblue;
+}

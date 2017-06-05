@@ -8,6 +8,8 @@ namespace SommenFlitser.Models
     public class OefeningRepository
     {
         private List<Oefening> oefeningen;
+        private List<Oplossing> oplossingen;
+        private int oplossingId = 0;
 
         private static OefeningRepository instance;
 
@@ -25,6 +27,8 @@ namespace SommenFlitser.Models
         {
             oefeningen = new List<Oefening>();
             CreateOefeningen();
+            oplossingen = new List<Oplossing>();
+            CreateOplossingen();
         }
 
         private void CreateOefeningen()
@@ -36,9 +40,35 @@ namespace SommenFlitser.Models
             oefeningen.Add(new Oefening { Id = 4, Vraag = "12 - 5", Actief = false, Resultaat = 7 });
         }
 
+        private void CreateOplossingen()
+        {
+            oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = 0, KindId = 0, OefeningId = 0 });
+        }
+
+        public List<Oplossing> SendOplossing(int answer)
+        {
+            if (answer == 3546)
+            {
+                oplossingen = new List<Oplossing>();
+                CreateOplossingen();
+            }
+            else
+            {
+                oplossingId++;
+                oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = 1, OefeningId = 1 });
+            }
+            
+            return oplossingen;
+        }
+
         public List<Oefening> GetOefeningen()
         {
             return oefeningen;
+        }
+
+        public List<Oplossing> GetOplossingen()
+        {
+            return oplossingen;
         }
 
         public List<Oefening> GetOefById(int id)
@@ -77,7 +107,6 @@ namespace SommenFlitser.Models
             int index = oefeningen.IndexOf(oef);
             oef.Actief = true;
             oefeningen[index] = oef;
-            
         }
 
         public List<Oefening> GetActiveOefening()
@@ -85,5 +114,7 @@ namespace SommenFlitser.Models
             Oefening oef = oefeningen.FirstOrDefault(x => x.Actief == true);
             return ReturnOefinList(oef);
         }
+
+
     }
 }

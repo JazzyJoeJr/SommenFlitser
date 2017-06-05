@@ -3,21 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GETTING STARTED WITH BRACKETS</title>
+        <title>DIGITAAL BORD</title>
+        <link rel="stylesheet" href="styles.css">
     
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <!--<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven Pro Black">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
         
         <script src="app.js"></script>
         <script>
             
-            app.controller("OefeningActiveController",function($scope, ActiveOefeningService,$interval){
+            app.controller("OplossingController",function($scope, OplossingService,$interval){
                 
                 var init = function(){
                     
                      $interval(function () {
-                            $scope.data = ActiveOefeningService.query();
+                            $scope.data = OplossingService.query();
                         
                         },5000);
                 
@@ -28,11 +30,10 @@
         </script>
     </head>
     <body ng-app="app">
-        <div ng-controller="OefeningActiveController">
-            {{data[0].Vraag}}<br/>
-            <input type=text/>
-            <button type="button" class="btn btn-navbar">Antwoord</button>
+        <div ng-controller="OplossingController">
+            <p ng-repeat="x in data">{{x.Antwoord}}</p>
         </div>
-        <script src="js/bootstrap.min.js"></script>
+        
+        <!--<script src="js/bootstrap.min.js"></script>-->
     </body>
 </html>

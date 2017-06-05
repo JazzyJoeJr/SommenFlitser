@@ -3,12 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GETTING STARTED WITH BRACKETS</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <title>LERAAR</title>
+        <!--<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">-->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
         <script src="app.js"></script>
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven Pro Black">
         <script>
             
             app.controller("OefeningActiveController",function($scope, ActiveOefeningService,$interval){
@@ -23,15 +24,13 @@
                     init();
             });
             
-            app.controller("OefeningController",function($scope,GetOefeningByIdService,OefeningService){
+            app.controller("OefeningController",function($scope,GetOefeningByIdService,OefeningService, OplossingService){
                 
                 var init = function(){
                     $scope.currentId = 1;
                     
                     $scope.data = GetOefeningByIdService.query({Id:$scope.currentId});
                     console.log($scope.data);
-                   
-                  
                     console.log($scope.val);
                 }
                 
@@ -51,8 +50,12 @@
                     $scope.data = OefeningService.query({Id:$scope.currentId});
                 }
                 
-                $scope.Reset = function() {
+                $scope.ResetOefening = function() {
                     $scope.data = OefeningService.query({Id:0})
+                }
+                
+                $scope.ResetBord = function() {
+                    OplossingService.query({Id:3546});
                 }
                 
             });
@@ -63,15 +66,17 @@
         <div ng-controller="OefeningController">
             <button type="button" class="btn btn-nav" ng-click="GetPrevious()">vorige</button>
             {{data[0].Vraag}}
-            <button type="button" class="btn btn-nav" ng-click="GetNext()">volgende</button> Antwoord: {{data[0].Resultaat}}<br/>
-            <button type="button" class="btn btn-nav" ng-click="SetOefeningTrue()">Toon Oefening</button><br/>
-            <button type="button" class="btn btn-nav" ng-click="Reset()">Reset</button><br/>
+            <button type="button" class="btn btn-nav" ng-click="GetNext()">volgende</button> <br/>
+            Antwoord: {{data[0].Resultaat}}<br/>
+            <button type="button" ng-click="SetOefeningTrue()">Toon Oefening</button>
+            <button type="button" ng-click="ResetOefening()">Reset Oefening</button>
+            <button type="button" ng-click="ResetBord()">Reset Bord</button><br/>
             Id = {{currentId}}<br/>
         </div>
         <div ng-controller="OefeningActiveController">
             
-            <p>dit ziet de leerling: {{data[0].Vraag}}</p>
+            <p>leerling: {{data[0].Vraag}}</p>
             </div>
-        <script src="js/bootstrap.min.js"></script>
+        <!--<script src="js/bootstrap.min.js"></script>-->
     </body>
 </html>

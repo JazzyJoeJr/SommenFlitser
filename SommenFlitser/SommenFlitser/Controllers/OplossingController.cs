@@ -1,24 +1,34 @@
-﻿using System;
+﻿using SommenFlitser.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace SommenFlitser.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "GET, POST")]
     public class OplossingController : ApiController
     {
-        // GET: api/Oplossing
-        public IEnumerable<string> Get()
+        private OefeningRepository repo;
+
+        public OplossingController()
         {
-            return new string[] { "value1", "value2" };
+            repo = OefeningRepository.GetInstance();
+        }
+
+        // GET: api/Oplossing
+        public IEnumerable<Oplossing> Get()
+        {
+            return repo.GetOplossingen();
         }
 
         // GET: api/Oplossing/5
-        public string Get(int id)
+        public IEnumerable<Oplossing> Get(int id)
         {
-            return "value";
+            return repo.SendOplossing(id);
         }
 
         // POST: api/Oplossing

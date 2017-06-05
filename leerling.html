@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GETTING STARTED WITH BRACKETS</title>
-    
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <title>LEERLING</title>
+        <link rel="stylesheet" href="styles.css">
+        <!--<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven Pro Black">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.4/angular-resource.js"></script>
         
@@ -27,7 +28,10 @@
             
             app.controller("OplossingController", function($scope, OplossingService){
                 
+                console.log("oplossingController actief");
+                
                 $scope.SendOplossing = function(Id){
+                    console.log("SendOplossing actief - input = " + Id)
                     $scope.oplossing = OplossingService.query({Id:Id});
                 }
                 
@@ -36,15 +40,26 @@
         </script>
     </head>
     <body ng-app="app">
+        <button type="button">Marie</button>
+        <button type="button">Jonas</button>
+        <button type="button">Stan</button>
+        <button type="button">Emma</button>
+        <button type="button">Jonas</button>
         <div ng-controller="OefeningActiveController">
             {{data[0].Vraag}}<br/>
         </div>
         <div ng-controller="OplossingController">
-            <form ng-submit="SendOplossing(Id)">
-                <input type=text name="Id"/>
-                <input type="submit" id="submit" value="Antwoord"/>
-            </form>
+            <button type="button" ng-click="SendOplossing(1)">1</button>
+            <button type="button" ng-click="SendOplossing(2)">2</button>
+            <button type="button" ng-click="SendOplossing(3)">3</button>
+            <button type="button" ng-click="SendOplossing(4)">4</button>
+            <button type="button" ng-click="SendOplossing(5)">5</button><br/>
+            <button type="button" ng-click="SendOplossing(6)">6</button>
+            <button type="button" ng-click="SendOplossing(7)">7</button>
+            <button type="button" ng-click="SendOplossing(8)">8</button>
+            <button type="button" ng-click="SendOplossing(9)">9</button>
+            <button type="button" ng-click="SendOplossing(10)">10</button>
         </div>
-        <script src="js/bootstrap.min.js"></script>
+        <!--<script src="js/bootstrap.min.js"></script>-->
     </body>
 </html>
