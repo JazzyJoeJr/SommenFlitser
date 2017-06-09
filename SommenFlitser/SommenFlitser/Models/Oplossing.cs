@@ -11,6 +11,7 @@ namespace SommenFlitser.Models
         public int KindId { get; set; }
         public int OefeningId { get; set; }
         public int Antwoord { get; set; }
+        public string Kleur { get; set; }
 
     }
 }

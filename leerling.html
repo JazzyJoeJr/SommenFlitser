@@ -30,35 +30,52 @@
                 
                 console.log("oplossingController actief");
                 
-                $scope.SendOplossing = function(Id){
-                    console.log("SendOplossing actief - input = " + Id)
-                    $scope.oplossing = OplossingService.query({Id:Id});
+                $scope.SendOplossing = function(Id,KindId){
+                    console.log("SendOplossing actief - input = " + Id);
+                    console.log("dit is het kind: " + $scope.kind[0]);
+                    console.log($scope.kind);
+                    console.log($scope.kind[0].Naam + $scope.kind[0].Id);
+                    var ki = $scope.kind;
+                    console.log("dit is de id: " + ki);
+                    $scope.oplossing = OplossingService.query({Id:Id, KindId:$scope.kind[0].Id});
                 }
                 
             })
+            
+            app.controller("KindController", function($scope, KindService){
+                $scope.SetKidActive = function(Id){
+                    console.log("SetKidActive actief - input = " + Id);
+                    $scope.kind = KindService.query({Id:Id});
+                    console.log($scope.kind);
+                }
+            });
            
         </script>
     </head>
     <body ng-app="app">
-        <button type="button">Marie</button>
-        <button type="button">Jonas</button>
-        <button type="button">Stan</button>
-        <button type="button">Emma</button>
-        <button type="button">Jonas</button>
-        <div ng-controller="OefeningActiveController">
-            {{data[0].Vraag}}<br/>
-        </div>
-        <div ng-controller="OplossingController">
-            <button type="button" ng-click="SendOplossing(1)">1</button>
-            <button type="button" ng-click="SendOplossing(2)">2</button>
-            <button type="button" ng-click="SendOplossing(3)">3</button>
-            <button type="button" ng-click="SendOplossing(4)">4</button>
-            <button type="button" ng-click="SendOplossing(5)">5</button><br/>
-            <button type="button" ng-click="SendOplossing(6)">6</button>
-            <button type="button" ng-click="SendOplossing(7)">7</button>
-            <button type="button" ng-click="SendOplossing(8)">8</button>
-            <button type="button" ng-click="SendOplossing(9)">9</button>
-            <button type="button" ng-click="SendOplossing(10)">10</button>
+        <div ng-controller="KindController">
+            <button type="button" ng-click="SetKidActive(1)">Marie</button>
+            <button type="button" ng-click="SetKidActive(2)">Jonas</button>
+            <button type="button" ng-click="SetKidActive(3)">Stan</button>
+            <button type="button" ng-click="SetKidActive(4)">Emma</button> 
+            <button type="button" ng-click="SetKidActive(5)">Ward</button><br/>
+            Hoi {{kind[0].Naam}} - {{kind[0].Color}}
+        
+            <div ng-controller="OefeningActiveController">
+                {{data[0].Vraag}}<br/>
+            </div>
+            <div ng-controller="OplossingController">
+                <button type="button" ng-click="SendOplossing(1,2)">1</button>
+                <button type="button" ng-click="SendOplossing(2)">2</button>
+                <button type="button" ng-click="SendOplossing(3)">3</button>
+                <button type="button" ng-click="SendOplossing(4)">4</button>
+                <button type="button" ng-click="SendOplossing(5)">5</button>
+                <button type="button" ng-click="SendOplossing(6)">6</button>
+                <button type="button" ng-click="SendOplossing(7)">7</button>
+                <button type="button" ng-click="SendOplossing(8)">8</button>
+                <button type="button" ng-click="SendOplossing(9)">9</button>
+                <button type="button" ng-click="SendOplossing(10)">10</button>
+            </div>
         </div>
         <!--<script src="js/bootstrap.min.js"></script>-->
     </body>

@@ -1,52 +1,48 @@
-﻿using SommenFlitser.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using SommenFlitser.Models;
 
 namespace SommenFlitser.Controllers
 {
+
     [EnableCors(origins: "*", headers: "*", methods: "GET, POST")]
-    public class OplossingController : ApiController
+    public class KindActiveController : ApiController
     {
         private OefeningRepository repo;
 
-        public OplossingController()
+        public KindActiveController()
         {
             repo = OefeningRepository.GetInstance();
         }
 
-        // GET: api/Oplossing
-        public IEnumerable<Oplossing> Get()
+        // GET: api/KindActive
+        public IEnumerable<Kind> Get()
         {
-            return repo.GetOplossingen();
+            return repo.GetActiveKids();
         }
 
-        // GET: api/Oplossing/5
-        public IEnumerable<Oplossing> Get(int id, int kindId)
+        // GET: api/KindActive/5
+        public string Get(int id)
         {
-            return repo.SendOplossing(id, kindId);
+            return "value";
         }
 
-        //public IEnumerable<Oplossing> Get(int id, Kind k)
-        //{
-        //    return repo.SendOplossing(id);
-        //}
-
-        // POST: api/Oplossing
+        // POST: api/KindActive
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Oplossing/5
+        // PUT: api/KindActive/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Oplossing/5
+        // DELETE: api/KindActive/5
         public void Delete(int id)
         {
         }

@@ -185,6 +185,8 @@
     <Compile Include="Controllers\ActiveOefeningController.cs" />
     <Compile Include="Controllers\GetOefeningByIdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KindActiveController.cs" />
+    <Compile Include="Controllers\KindController.cs" />
     <Compile Include="Controllers\OefeningController.cs" />
     <Compile Include="Controllers\OplossingController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

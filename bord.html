@@ -14,12 +14,13 @@
         <script src="app.js"></script>
         <script>
             
-            app.controller("OplossingController",function($scope, OplossingService,$interval){
+            app.controller("OplossingController",function($scope, OplossingService, $interval){
                 
                 var init = function(){
                     
                      $interval(function () {
-                            $scope.data = OplossingService.query();
+                         $scope.data = OplossingService.query();
+                         
                         
                         },5000);
                 
@@ -31,7 +32,7 @@
     </head>
     <body ng-app="app">
         <div ng-controller="OplossingController">
-            <p ng-repeat="x in data">{{x.Antwoord}}</p>
+            <p ng-repeat="x in data" style="color:{{x.Kleur}}">{{x.Antwoord}}</p>
         </div>
         
         <!--<script src="js/bootstrap.min.js"></script>-->

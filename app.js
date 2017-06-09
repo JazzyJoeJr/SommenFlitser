@@ -20,3 +20,11 @@ app.factory("GetOefeningByIdService",function($resource){
 app.factory("OplossingService", function($resource){
     return $resource('http://localhost:51794/api/Oplossing/:oplossing',{oplossing: "@oplossing"})
 })
+
+app.factory("KindService", function($resource){
+    return $resource('http://localhost:51794/api/Kind/:kind',{kind: "@kind"})
+})
+
+app.factory("KindActiveService", function($resource){
+    return $resource('http://localhost:51794/api/KindActive/:kind',{kind: "@kind"})
+})

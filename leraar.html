@@ -12,19 +12,20 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Maven Pro Black">
         <script>
             
-            app.controller("OefeningActiveController",function($scope, ActiveOefeningService,$interval){
+            app.controller("ActiveController",function($scope, ActiveOefeningService,KindActiveService,$interval){
                 
                 var init = function(){
                     
                      $interval(function () {
                             $scope.data = ActiveOefeningService.query();
+                            $scope.kids = KindActiveService.query();
                         },5000);
                 
                 }
                     init();
             });
             
-            app.controller("OefeningController",function($scope,GetOefeningByIdService,OefeningService, OplossingService){
+            app.controller("OefeningController",function($scope,GetOefeningByIdService,OefeningService, OplossingService, KindService){
                 
                 var init = function(){
                     $scope.currentId = 1;
@@ -55,28 +56,36 @@
                 }
                 
                 $scope.ResetBord = function() {
-                    OplossingService.query({Id:3546});
+                    OplossingService.query({Id:3546,kindId:0});
+                }
+                
+                $scope.ResetKids = function(Id) {
+                    KindService.query({Id:Id});
                 }
                 
             });
+            
            
         </script>
     </head>
     <body ng-app="app">
         <div ng-controller="OefeningController">
+            <p>-SOMMENFLITSER-</p>
             <button type="button" class="btn btn-nav" ng-click="GetPrevious()">vorige</button>
             {{data[0].Vraag}}
             <button type="button" class="btn btn-nav" ng-click="GetNext()">volgende</button> <br/>
             Antwoord: {{data[0].Resultaat}}<br/>
-            <button type="button" ng-click="SetOefeningTrue()">Toon Oefening</button>
-            <button type="button" ng-click="ResetOefening()">Reset Oefening</button>
+            <button type="button" ng-click="SetOefeningTrue()">Toon Oefening</button><br/>
+            <button type="button" ng-click="ResetOefening()">Reset Oefening</button><br/>
             <button type="button" ng-click="ResetBord()">Reset Bord</button><br/>
+            <button type="button" ng-click="ResetKids(0)">Reset Kids</button><br/>
             Id = {{currentId}}<br/>
         </div>
-        <div ng-controller="OefeningActiveController">
-            
-            <p>leerling: {{data[0].Vraag}}</p>
-            </div>
+        <div ng-controller="ActiveController">
+            <p>leerling ziet: {{data[0].Vraag}}</p>
+            actieve leerlingen:<br/>
+            <p ng-repeat="k in kids">{{k.Naam}}</p>
+        </div>
         <!--<script src="js/bootstrap.min.js"></script>-->
     </body>
 </html>

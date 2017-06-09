@@ -9,6 +9,7 @@ namespace SommenFlitser.Models
     {
         private List<Oefening> oefeningen;
         private List<Oplossing> oplossingen;
+        private List<Kind> kinderen;
         private int oplossingId = 0;
 
         private static OefeningRepository instance;
@@ -28,16 +29,32 @@ namespace SommenFlitser.Models
             oefeningen = new List<Oefening>();
             CreateOefeningen();
             oplossingen = new List<Oplossing>();
-            CreateOplossingen();
+            //CreateOplossingen();
+            kinderen = new List<Kind>();
+            CreateKids();
         }
 
         private void CreateOefeningen()
         {
             oefeningen.Add(new Oefening { Id = 0, Vraag = "", Actief = true, Resultaat = 0 });
-            oefeningen.Add(new Oefening { Id = 1, Vraag = "7 + 5", Actief = false, Resultaat = 12 });
+            oefeningen.Add(new Oefening { Id = 1, Vraag = "7 + 2", Actief = false, Resultaat = 9 });
             oefeningen.Add(new Oefening { Id = 2, Vraag = "2 + 3", Actief = false, Resultaat = 5 });
             oefeningen.Add(new Oefening { Id = 3, Vraag = "8 - 4", Actief = false, Resultaat = 4 });
             oefeningen.Add(new Oefening { Id = 4, Vraag = "12 - 5", Actief = false, Resultaat = 7 });
+        }
+
+        private void CreateKids()
+        {
+            string[] kids = new string[] { "Marie", "Jonas", "Stan", "Emma", "Ward" };
+            string[] colors = new string[] { "Red", "Green", "Blue", "Yellow", "Brown" };
+            int i = 1;
+
+            foreach (string k in kids)
+            {
+                kinderen.Add(new Kind { Id = i, Naam = k, Actief = false, Color = colors[i-1] });
+                i++;
+            }
+
         }
 
         private void CreateOplossingen()
@@ -45,17 +62,21 @@ namespace SommenFlitser.Models
             oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = 0, KindId = 0, OefeningId = 0 });
         }
 
-        public List<Oplossing> SendOplossing(int answer)
+        
+
+        public List<Oplossing> SendOplossing(int answer, int kindId)
         {
             if (answer == 3546)
             {
                 oplossingen = new List<Oplossing>();
-                CreateOplossingen();
+                //CreateOplossingen();
             }
             else
             {
                 oplossingId++;
-                oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = 1, OefeningId = 1 });
+                Kind kind = kinderen.FirstOrDefault(k => k.Id == kindId);
+                string kleur = kind.Color;
+                oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = kindId, OefeningId = 1, Kleur = kleur });
             }
             
             return oplossingen;
@@ -96,6 +117,24 @@ namespace SommenFlitser.Models
             return ReturnOefinList(oef);
         }
 
+        public List<Kind> SetKid(int id)
+        {
+            List<Kind> tmp = new List<Kind>();
+
+            if (id == 0)
+            {
+                kinderen = new List<Kind>();
+                CreateKids();
+            }
+            else
+            {
+                SetKidActive(id);
+                tmp.Add(kinderen[id - 1]);
+            }
+
+            return tmp;
+        }
+
         public void SaveOef(Oefening oef)
         {
             oefeningen.Add(oef);
@@ -109,12 +148,24 @@ namespace SommenFlitser.Models
             oefeningen[index] = oef;
         }
 
+        public void SetKidActive(int id)
+        {
+            Kind kid = kinderen.FirstOrDefault(k => k.Id == id);
+            int index = kinderen.IndexOf(kid);
+            kid.Actief = true;
+            kinderen[index] = kid;
+        }
+
         public List<Oefening> GetActiveOefening()
         {
             Oefening oef = oefeningen.FirstOrDefault(x => x.Actief == true);
             return ReturnOefinList(oef);
         }
 
-
+        public List<Kind> GetActiveKids()
+        {
+            List<Kind> kids = kinderen.Where(k => k.Actief == true).ToList();
+            return kids;
+        }
     }
 }

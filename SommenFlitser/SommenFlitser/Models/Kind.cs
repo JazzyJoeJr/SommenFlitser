@@ -9,5 +9,7 @@ namespace SommenFlitser.Models
     {
         public int Id { get; set; }
         public string Naam { get; set; }
+        public bool Actief { get; set; }
+        public string Color { get; set; }
     }
 }
