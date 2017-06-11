@@ -20,9 +20,9 @@ namespace SommenFlitser.Controllers
         }
 
         // GET: api/Kind
-        public IEnumerable<string> Get()
+        public IEnumerable<Kind> Get()
         {
-            return new string[] { "value1", "value2" };
+            return repo.GetKids();
         }
 
         // GET: api/Kind/5

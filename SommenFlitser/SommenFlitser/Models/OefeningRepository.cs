@@ -29,24 +29,27 @@ namespace SommenFlitser.Models
             oefeningen = new List<Oefening>();
             CreateOefeningen();
             oplossingen = new List<Oplossing>();
-            //CreateOplossingen();
             kinderen = new List<Kind>();
             CreateKids();
         }
 
         private void CreateOefeningen()
         {
-            oefeningen.Add(new Oefening { Id = 0, Vraag = "", Actief = true, Resultaat = 0 });
-            oefeningen.Add(new Oefening { Id = 1, Vraag = "7 + 2", Actief = false, Resultaat = 9 });
-            oefeningen.Add(new Oefening { Id = 2, Vraag = "2 + 3", Actief = false, Resultaat = 5 });
-            oefeningen.Add(new Oefening { Id = 3, Vraag = "8 - 4", Actief = false, Resultaat = 4 });
-            oefeningen.Add(new Oefening { Id = 4, Vraag = "12 - 5", Actief = false, Resultaat = 7 });
+            string[] sommen = new string[] {"", "7+2", "2+3", "8-4", "12-5" };
+            int[] res = new int[] {0, 9, 5, 4, 7 };
+            int i = 0;
+
+            foreach (string s in sommen)
+            {
+                oefeningen.Add(new Oefening { Id = i, Vraag = s, Actief = false, Resultaat = res[i] });
+                i++;
+            }
         }
 
         private void CreateKids()
         {
             string[] kids = new string[] { "Marie", "Jonas", "Stan", "Emma", "Ward" };
-            string[] colors = new string[] { "Red", "Green", "Blue", "Yellow", "Brown" };
+            string[] colors = new string[] { "Red", "Green", "Blue", "Gold", "Brown" };
             int i = 1;
 
             foreach (string k in kids)
@@ -69,7 +72,6 @@ namespace SommenFlitser.Models
             if (answer == 3546)
             {
                 oplossingen = new List<Oplossing>();
-                //CreateOplossingen();
             }
             else
             {
@@ -166,6 +168,11 @@ namespace SommenFlitser.Models
         {
             List<Kind> kids = kinderen.Where(k => k.Actief == true).ToList();
             return kids;
+        }
+
+        public List<Kind> GetKids()
+        {
+            return kinderen;
         }
     }
 }
