@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -35,6 +36,40 @@ namespace SommenFlitser.Models
 
         private void CreateOefeningen()
         {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(
+                    @"Server=.\SQLExpress; Database=SommenFlitser; Integrated Security = SSPI"))
+                using (SqlCommand command = new SqlCommand(
+                    "SELECT Id, Vraag, Actief, Resultaat FROM dbo.Oefening", connection))
+                {
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Oefening oef = new Oefening();
+                            oef.Id = Convert.ToInt32(reader[0]);
+                            oef.Vraag = Convert.ToString(reader[1]);
+                            oef.Actief = Convert.ToBoolean(reader[2]);
+                            oef.Resultaat = Convert.ToInt32(reader[3]);
+
+                            oefeningen.Add(oef);
+                        }
+                    }
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
             string[] sommen = new string[] {"", "7+2", "2+3", "8-4", "12-5" };
             int[] res = new int[] {0, 9, 5, 4, 7 };
             int i = 0;

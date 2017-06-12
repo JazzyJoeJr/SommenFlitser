@@ -74,3 +74,10 @@ C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\obj\Debug
 C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\System.Web.Cors.dll
 C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\System.Web.Http.Cors.dll
 C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\System.Web.Http.Cors.xml
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\MongoDB.Bson.dll
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\MongoDB.Driver.Core.dll
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\MongoDB.Driver.dll
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\MongoDB.Bson.xml
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\MongoDB.Driver.xml
+C:\Users\jo\Documents\ProjectProgrammeren5\SommenFlitser\SommenFlitser\bin\MongoDB.Driver.Core.xml
