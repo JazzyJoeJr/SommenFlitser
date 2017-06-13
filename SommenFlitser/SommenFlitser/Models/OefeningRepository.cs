@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -58,8 +59,6 @@ namespace SommenFlitser.Models
                             oefeningen.Add(oef);
                         }
                     }
-
-
                 }
             }
             catch (Exception)
@@ -68,17 +67,15 @@ namespace SommenFlitser.Models
                 throw;
             }
 
+            //string[] sommen = new string[] {"", "7+2", "2+3", "8-4", "12-5" };
+            //int[] res = new int[] {0, 9, 5, 4, 7 };
+            //int i = 0;
 
-
-            string[] sommen = new string[] {"", "7+2", "2+3", "8-4", "12-5" };
-            int[] res = new int[] {0, 9, 5, 4, 7 };
-            int i = 0;
-
-            foreach (string s in sommen)
-            {
-                oefeningen.Add(new Oefening { Id = i, Vraag = s, Actief = false, Resultaat = res[i] });
-                i++;
-            }
+            //foreach (string s in sommen)
+            //{
+            //    oefeningen.Add(new Oefening { Id = i, Vraag = s, Actief = false, Resultaat = res[i] });
+            //    i++;
+            //}
         }
 
         private void CreateKids()
@@ -114,8 +111,32 @@ namespace SommenFlitser.Models
                 Kind kind = kinderen.FirstOrDefault(k => k.Id == kindId);
                 string kleur = kind.Color;
                 oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = kindId, OefeningId = 1, Kleur = kleur });
+
+                //database start
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(
+                        @"Server=.\SQLExpress; Database=SommenFlitser; Integrated Security = SSPI"))
+                    using (SqlCommand command = new SqlCommand(
+                        "INSERT INTO dbo.Oplossing (KindId, OefeningId, Antwoord, Kleur)"
+                        + "VALUES (@KindId, @OefeningId, @Antwoord, @Kleur)", connection))
+                    {
+                        command.Parameters.Add("KindId", SqlDbType.Int).Value = kindId;
+                        command.Parameters.Add("OefeningId", SqlDbType.Int).Value = 1;
+                        command.Parameters.Add("Antwoord", SqlDbType.Int).Value = answer;
+                        command.Parameters.Add("Kleur", SqlDbType.VarChar, 50).Value = "Gold";
+
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
-            
+            //database stop
             return oplossingen;
         }
 
