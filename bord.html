@@ -30,9 +30,9 @@
            
         </script>
     </head>
-    <body ng-app="app">
-        <div ng-controller="OplossingController">
-            <p ng-repeat="x in data" style="color:{{x.Kleur}}">{{x.Antwoord}}</p>
+    <body ng-app="app" background="blackboard.jpg">
+        <div ng-controller="OplossingController" >
+            <p ng-repeat="x in data" style="color:{{x.Kleur}};text-align:center; vertical-align: middle">{{x.Antwoord}}</p>
         </div>
         
         <!--<script src="js/bootstrap.min.js"></script>-->

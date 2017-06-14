@@ -99,7 +99,7 @@ namespace SommenFlitser.Models
 
         
 
-        public List<Oplossing> SendOplossing(int answer, int kindId)
+        public List<Oplossing> SendOplossing(int answer, int kindId, int oefeningId)
         {
             if (answer == 3546)
             {
@@ -110,7 +110,7 @@ namespace SommenFlitser.Models
                 oplossingId++;
                 Kind kind = kinderen.FirstOrDefault(k => k.Id == kindId);
                 string kleur = kind.Color;
-                oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = kindId, OefeningId = 1, Kleur = kleur });
+                oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = kindId, OefeningId = oefeningId, Kleur = kleur });
 
                 //database start
                 try
@@ -122,9 +122,9 @@ namespace SommenFlitser.Models
                         + "VALUES (@KindId, @OefeningId, @Antwoord, @Kleur)", connection))
                     {
                         command.Parameters.Add("KindId", SqlDbType.Int).Value = kindId;
-                        command.Parameters.Add("OefeningId", SqlDbType.Int).Value = 1;
+                        command.Parameters.Add("OefeningId", SqlDbType.Int).Value = oefeningId;
                         command.Parameters.Add("Antwoord", SqlDbType.Int).Value = answer;
-                        command.Parameters.Add("Kleur", SqlDbType.VarChar, 50).Value = "Gold";
+                        command.Parameters.Add("Kleur", SqlDbType.VarChar, 50).Value = kleur;
 
                         connection.Open();
                         command.ExecuteNonQuery();

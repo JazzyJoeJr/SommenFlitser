@@ -18,7 +18,7 @@
                 var init = function(){
                     
                      $interval(function () {
-                            $scope.data = ActiveOefeningService.query();
+                            $scope.oefening = ActiveOefeningService.query();
                         
                         },5000);
                 
@@ -29,17 +29,20 @@
             app.controller("OplossingController", function($scope, OplossingService, KindService){
                 
                 
-                
                 console.log("oplossingController actief");
                 
-                $scope.SendOplossing = function(Id,KindId){
+                $scope.SendOplossing = function(Id, KindId, OefeningId){
+                    
+                    
                     console.log("SendOplossing actief - input = " + Id);
                     console.log("dit is het kind: " + $scope.kind[0]);
                     console.log($scope.kind);
                     console.log($scope.kind[0].Naam + $scope.kind[0].Id);
-                    var ki = $scope.kind;
+                    var ki = $scope.kind[0].Id;
                     console.log("dit is de id: " + ki);
-                    $scope.oplossing = OplossingService.query({Id:Id, KindId:$scope.kind[0].Id});
+                    console.log("dit is $scope.oefening " + $scope.oefening[0].Vraag)
+                    
+                    $scope.oplossing = OplossingService.query({Id:Id, KindId:$scope.kind[0].Id, OefeningId:$scope.oefening[0].Id});
                 }
                 
             })
@@ -64,27 +67,39 @@
         </script>
     </head>
     <body ng-app="app">
-        <div ng-controller="KindController">
-            <button ng-repeat="k in kids" ng-click="SetKidActive(k.Id)" style="color: {{k.Color}}">{{k.Naam}}</button>
-            <br/>
-            <p style="color: {{kind[0].Color}}">Hoi {{kind[0].Naam}}</p>
-            <div ng-controller="OefeningActiveController">
-                {{data[0].Vraag}}
-            </div>
-            <div ng-controller="OplossingController">
-                <button type="button" ng-click="SendOplossing(1)">1</button>
-                <button type="button" ng-click="SendOplossing(2)">2</button>
-                <button type="button" ng-click="SendOplossing(3)">3</button>
-                <button type="button" ng-click="SendOplossing(4)">4</button>
-                <button type="button" ng-click="SendOplossing(5)">5</button>
-                <button type="button" ng-click="SendOplossing(6)">6</button>
-                <button type="button" ng-click="SendOplossing(7)">7</button>
-                <button type="button" ng-click="SendOplossing(8)">8</button>
-                <button type="button" ng-click="SendOplossing(9)">9</button>
-                <button type="button" ng-click="SendOplossing(10)">10</button>
-                <button type="button" ng-repeat="n in [] | range:10" ng-click="SendOplossing(n)">{{n}}</button>
+        <div ng-controller="OefeningActiveController">
+            <div ng-controller="KindController">
+                <button ng-repeat="k in kids" ng-click="SetKidActive(k.Id)" style="color: {{k.Color}}">{{k.Naam}}</button>
+                <br/>
+                <table style= "width: 100%">
+                    <tr>
+                        <td>
+                            <p style="color: {{kind[0].Color}}">{{kind[0].Naam}}</p>
+                        </td>
+                        <td>
+                            <div>
+                                <p>Oefening: {{oefening[0].Vraag}}</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            
+            
+                <div ng-controller="OplossingController">
+                    <button type="button" ng-click="SendOplossing(1)">1</button>
+                    <button type="button" ng-click="SendOplossing(2)">2</button>
+                    <button type="button" ng-click="SendOplossing(3)">3</button>
+                    <button type="button" ng-click="SendOplossing(4)">4</button>
+                    <button type="button" ng-click="SendOplossing(5)">5</button>
+                    <button type="button" ng-click="SendOplossing(6)">6</button>
+                    <button type="button" ng-click="SendOplossing(7)">7</button>
+                    <button type="button" ng-click="SendOplossing(8)">8</button>
+                    <button type="button" ng-click="SendOplossing(9)">9</button>
+                    <button type="button" ng-click="SendOplossing(10)">10</button>
+                </div>
             </div>
         </div>
+        
         <!--<script src="js/bootstrap.min.js"></script>-->
     </body>
 </html>

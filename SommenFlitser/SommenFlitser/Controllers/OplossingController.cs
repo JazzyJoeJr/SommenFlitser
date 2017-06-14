@@ -26,9 +26,9 @@ namespace SommenFlitser.Controllers
         }
 
         // GET: api/Oplossing/5
-        public IEnumerable<Oplossing> Get(int id, int kindId)
+        public IEnumerable<Oplossing> Get(int id, int kindId, int oefeningId)
         {
-            return repo.SendOplossing(id, kindId);
+            return repo.SendOplossing(id, kindId, oefeningId);
         }
 
         //public IEnumerable<Oplossing> Get(int id, Kind k)
