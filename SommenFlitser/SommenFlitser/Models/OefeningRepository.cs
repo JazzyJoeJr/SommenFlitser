@@ -10,9 +10,9 @@ namespace SommenFlitser.Models
     public class OefeningRepository
     {
         private List<Oefening> oefeningen;
-        private List<Oplossing> oplossingen;
+        //private List<Oplossing> oplossingen;
         private List<Kind> kinderen;
-        private int oplossingId = 0;
+        //private int oplossingId = 0;
 
         private static OefeningRepository instance;
 
@@ -30,7 +30,7 @@ namespace SommenFlitser.Models
         {
             oefeningen = new List<Oefening>();
             CreateOefeningen();
-            oplossingen = new List<Oplossing>();
+            //oplossingen = new List<Oplossing>();
             kinderen = new List<Kind>();
             CreateKids();
         }
@@ -92,63 +92,63 @@ namespace SommenFlitser.Models
 
         }
 
-        private void CreateOplossingen()
-        {
-            oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = 0, KindId = 0, OefeningId = 0 });
-        }
+        //private void CreateOplossingen()
+        //{
+        //    oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = 0, KindId = 0, OefeningId = 0 });
+        //}
 
         
 
-        public List<Oplossing> SendOplossing(int answer, int kindId, int oefeningId)
-        {
-            if (answer == 3546)
-            {
-                oplossingen = new List<Oplossing>();
-            }
-            else
-            {
-                oplossingId++;
-                Kind kind = kinderen.FirstOrDefault(k => k.Id == kindId);
-                string kleur = kind.Color;
-                oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = kindId, OefeningId = oefeningId, Kleur = kleur });
+        //public List<Oplossing> SendOplossing(int answer, int kindId, int oefeningId)
+        //{
+        //    if (answer == 3546)
+        //    {
+        //        oplossingen = new List<Oplossing>();
+        //    }
+        //    else
+        //    {
+        //        oplossingId++;
+        //        Kind kind = kinderen.FirstOrDefault(k => k.Id == kindId);
+        //        string kleur = kind.Color;
+        //        oplossingen.Add(new Oplossing { Id = oplossingId, Antwoord = answer, KindId = kindId, OefeningId = oefeningId, Kleur = kleur });
 
-                //database start
-                try
-                {
-                    using (SqlConnection connection = new SqlConnection(
-                        @"Server=.\SQLExpress; Database=SommenFlitser; Integrated Security = SSPI"))
-                    using (SqlCommand command = new SqlCommand(
-                        "INSERT INTO dbo.Oplossing (KindId, OefeningId, Antwoord, Kleur)"
-                        + "VALUES (@KindId, @OefeningId, @Antwoord, @Kleur)", connection))
-                    {
-                        command.Parameters.Add("KindId", SqlDbType.Int).Value = kindId;
-                        command.Parameters.Add("OefeningId", SqlDbType.Int).Value = oefeningId;
-                        command.Parameters.Add("Antwoord", SqlDbType.Int).Value = answer;
-                        command.Parameters.Add("Kleur", SqlDbType.VarChar, 50).Value = kleur;
+        //        //database start
+        //        try
+        //        {
+        //            using (SqlConnection connection = new SqlConnection(
+        //                @"Server=.\SQLExpress; Database=SommenFlitser; Integrated Security = SSPI"))
+        //            using (SqlCommand command = new SqlCommand(
+        //                "INSERT INTO dbo.Oplossing (KindId, OefeningId, Antwoord, Kleur)"
+        //                + "VALUES (@KindId, @OefeningId, @Antwoord, @Kleur)", connection))
+        //            {
+        //                command.Parameters.Add("KindId", SqlDbType.Int).Value = kindId;
+        //                command.Parameters.Add("OefeningId", SqlDbType.Int).Value = oefeningId;
+        //                command.Parameters.Add("Antwoord", SqlDbType.Int).Value = answer;
+        //                command.Parameters.Add("Kleur", SqlDbType.VarChar, 50).Value = kleur;
 
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception)
-                {
+        //                connection.Open();
+        //                command.ExecuteNonQuery();
+        //            }
+        //        }
+        //        catch (Exception)
+        //        {
 
-                    throw;
-                }
-            }
-            //database stop
-            return oplossingen;
-        }
+        //            throw;
+        //        }
+        //    }
+        //    //database stop
+        //    return oplossingen;
+        //}
 
         public List<Oefening> GetOefeningen()
         {
             return oefeningen;
         }
 
-        public List<Oplossing> GetOplossingen()
-        {
-            return oplossingen;
-        }
+        //public List<Oplossing> GetOplossingen()
+        //{
+        //    return oplossingen;
+        //}
 
         public List<Oefening> GetOefById(int id)
         {

@@ -12,11 +12,11 @@ namespace SommenFlitser.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "GET, POST")]
     public class OplossingController : ApiController
     {
-        private OefeningRepository repo;
+        private OplossingRepository repo;
 
         public OplossingController()
         {
-            repo = OefeningRepository.GetInstance();
+            repo = OplossingRepository.GetInstance();
         }
 
         // GET: api/Oplossing

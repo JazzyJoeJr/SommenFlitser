@@ -209,6 +209,7 @@
     <Compile Include="Models\Oefening.cs" />
     <Compile Include="Models\OefeningRepository.cs" />
     <Compile Include="Models\Oplossing.cs" />
+    <Compile Include="Models\OplossingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
